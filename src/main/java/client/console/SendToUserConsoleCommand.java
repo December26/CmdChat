@@ -1,6 +1,7 @@
 package client.console;
 
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import protocol.request.MessageRequestPacket;
 
 import java.util.Scanner;
@@ -13,9 +14,18 @@ public class SendToUserConsoleCommand implements ConsoleCommand {
         String toUserId = scanner.nextLine();
         System.out.println("发送内容");
         String message = scanner.nextLine();
-        while(!message.equals("switch")){
-            System.out.println("To " + toUserId + ": " + message);
-            channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
+
+        while(message.equals("\n")) message = scanner.nextLine();//防止直接按回车发送空内容
+
+        while(!message.equals("swi")){
+            final String msg = message;
+            channel.writeAndFlush(new MessageRequestPacket(toUserId, message)).addListener(future -> {
+                if(future.isSuccess()) {
+                    System.out.println("To " + toUserId + ": " + msg);
+                } else {
+                    System.out.println("给" + toUserId + "的消息发送失败");
+                }
+            });
             message = scanner.nextLine();
         }
 

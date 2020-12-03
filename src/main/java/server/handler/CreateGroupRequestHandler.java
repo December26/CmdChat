@@ -40,7 +40,8 @@ public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<Creat
         }
 
         // 3. 创建群聊创建结果的响应
-        String groupId = IDUtil.randomId();
+        //String groupId = IDUtil.randomId();
+        String groupId = IDUtil.newGrouoId();
         CreateGroupResponsePacket createGroupResponsePacket = new CreateGroupResponsePacket();
         createGroupResponsePacket.setSuccess(true);
         createGroupResponsePacket.setGroupId(groupId);
