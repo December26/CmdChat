@@ -5,6 +5,8 @@ import io.netty.channel.group.ChannelGroup;
 import attribute.Attributes;
 import session.Session;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,5 +50,13 @@ public class SessionUtil {
 
     public static ChannelGroup getChannelGroup(String groupId) {
         return groupIdChannelGroupMap.get(groupId);
+    }
+
+    public static List<Session> getUsersSessions() {
+        List<Session> lu = new ArrayList<>(10);
+        for(Channel ch : userIdChannelMap.values()) {
+            lu.add(getSession(ch));
+        }
+        return lu;
     }
 }

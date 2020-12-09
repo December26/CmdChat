@@ -19,6 +19,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
         consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
         consoleCommandMap.put("sendToGroup", new SendToGroupConsoleCommand());
+        consoleCommandMap.put("listUsers", new ListUsersConsoleCommand());
 
         consoleCommandMap.put("u", new SendToUserConsoleCommand());
         //consoleCommandMap.put("logout", new LogoutConsoleCommand());
@@ -27,12 +28,13 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("q", new QuitGroupConsoleCommand());
         consoleCommandMap.put("listg", new ListGroupMembersConsoleCommand());
         consoleCommandMap.put("g", new SendToGroupConsoleCommand());
+        consoleCommandMap.put("l", new ListUsersConsoleCommand());
     }
 
     @Override
     public void exec(Scanner scanner, Channel channel) {
         System.out.println("请输入指令");
-        System.out.println("u:私聊  g:群聊  c: 建群  j:加群  q:退群");
+        System.out.println("u:私聊  l:列表  g:群聊  c: 建群  j:加群  q:退群");
         //  获取第一个指令
         String command = scanner.nextLine();
 
